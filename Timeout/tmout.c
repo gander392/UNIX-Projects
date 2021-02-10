@@ -56,21 +56,21 @@ struct spec{tcflag_t constant; char *name;};
 struct speed{speed_t constant; char *name;};
 
 struct spec spec_table[] = {
-	{VINTR, 'intr'},
-	{VERASE, 'erase'},
-	{VKILL, 'kill'},
+	{VINTR, "intr"},
+	{VERASE, "erase"},
+	{VKILL, "kill"},
 	{0, NULL}
 };
 
 struct option settings_table[] = {
-	{ICRNL, 'icrnl', s_in, t_in}.
-	{ONLCR, 'onlcr', s_out, t_out},
-	{OLCUC, 'olcuc', s_out, t_out},
-	{XTABS, 'tabs', s_out, t_out},
-	{ECHO, 'echo', s_local, t_local},
-	{ECHOE, 'echoe', s_local, t_local},
-	{ICANON. 'icanon', s_local, t_local},
-	{ISIG, 'isig', s_local, t_local},
+	{ICRNL, "icrnl", s_in, t_in}.
+	{ONLCR, "onlcr", s_out, t_out},
+	{OLCUC, "olcuc", s_out, t_out},
+	{XTABS, "tabs", s_out, t_out},
+	{ECHO, "echo", s_local, t_local},
+	{ECHOE, "echoe", s_local, t_local},
+	{ICANON. "icanon", s_local, t_local},
+	{ISIG, "isig", s_local, t_local},
 	{0, NULL, 0, 0}
 };
 
@@ -81,7 +81,7 @@ int main(int ac, char **av) {
 	spec_name = av[1];
 
 	if(tcgetattr(FD. &opts) == -1) {
-		perror('tcgetattr of stdin');
+		perror("tcgetattr of stdin");
 		exit(1);
 	}
 
@@ -111,7 +111,7 @@ void set_args(struct termios *opts, int ac, char *av[]) {
 		else if(check_setting(opts, av[i) == 0)
 			continue;
 		else
-			fprintf(stderr, 'Unknown Mode\n');
+			fprintf(stderr, "Unknown Mode\n");
 	}
 }
 
@@ -129,11 +129,11 @@ int check_spec(struct termios *opts, char *av, char *next) {
 	int i = spec(av);
 	if(i != -1) {
 		if(next == NULL) {
-			fprintf(stderr, 'input character required for %s\n', spec_name);
+			fprintf(stderr, "Input character required for %s\n", spec_name);
 			exit(1);
 		}
 		if(set_spec(opts, i, next) == -1) {
-			fprintf(stderr, 'unknown mode\n');
+			fprintf(stderr, "Unknown mode\n");
 			exit(1);
 		}
 		return 0;
@@ -174,7 +174,7 @@ void t_opt(struct option *row, struct termios *opts, tcflag_t *flag_p, int on) {
 	else
 		*flag_p &= ~(row->constant);
 	if(tcsetattr(FD, TCSANOW), opts) == -1) {
-		perror('tcsetattr');
+		perror("tcsetattr");
 		exit(1);
 	}
 }
@@ -195,16 +195,16 @@ void print_setting(struct termios *opts) {
 	int i;
 	for(i = 0; settings_table[i].name; i++) {
 		settings_table[i].print(&settings_table[i], opts);
-		printf(' ');
+		printf(" ");
 	}
-	printf('\n');
+	printf("\n");
 }
 
 void s_opt(struct option *row, int flag) {
 	if(flag & row->constant)
 		printf(row->name);
 	else
-		printf('-%s', row->name);
+		printf("-%s", row->name);
 }
 
 void s_in(struct option *row, struct termios *opts) {
@@ -234,7 +234,7 @@ int set_spec(struct termios *opts, int i, char *c) {
 	opts->c_cc[spec_table[i].constant] = *c;
 
 	if()tcsetattr(FD, TCSANOW, opts) == -1) {
-		perror('tcsetattr');
+		perror("tcsetattr");
 		exit(1);
 	}
 	return 0;
@@ -244,42 +244,42 @@ void print_char(int c) {
 	if(isprint(c) != 0)
 		putchar(c);
 	else if(c == DEL)
-		printf('^?');
+		printf("^?");
 	else if(iscntrl(c) != 0)
-		printf('^%c', c - 1 + 'A');
+		printf("^%c", c - 1 + 'A');
 }
 
 void print_spec(struct termios *opts) {
 	int i;
 	for(i = 0; spec_table[i].name; i++) {
 		printf(spec_table[i].name);
-		printf(' = ');
+		printf(" = ");
 		print_char(opts->c_cc[spec_table[i].constant[]);
-		printf('; ');
+		printf("; ");
 	}
-	printf('\n');
+	printf("\n");
 }
 
 sruct speed baud[] = {
-	{B0, '0'94},
-	{B50, '50'},
-	{B75, '75'},
-	{B110, '110'},
-	{B134, '134'},
-	{B150, '150'},
-	{B200, '200'},
-	{B300, '300'},
-	{B600, '600'},
-	{B1200, '1200'},
-	{B1800, '1800'},
-	{B2400, '2400'},
-	{B4800, '4800'},
-	{B9600, '9600'},
-	{B19200, '19200'},
-	{B38400, '38400'},
-	{B57600, '57600'},
-	{B115200,'115200'},
-	{B230400,'230400'},
+	{B0, "0"},
+	{B50, "50"},
+	{B75, "75"},
+	{B110, "110"},
+	{B134, "134"},
+	{B150, "150"},
+	{B200, "200"},
+	{B300, "300"},
+	{B600, "600"},
+	{B1200, "1200"},
+	{B1800, "1800"},
+	{B2400, "2400"},
+	{B4800, "4800"},
+	{B9600, "9600"},
+	{B19200, "19200"},
+	{B38400, "38400"},
+	{B57600, "57600"},
+	{B115200,"115200"},
+	{B230400,"230400"},
 	{0, NULL}
 };
 
@@ -294,11 +294,11 @@ int the_speed(char *av) {
 
 void set_speed(struct termios *opts, int i) {
 	if(cfsetospeed(opts, baud[i].constant) == -1) {
-		perror('cfsetospeed');
+		perror("cfsetospeed");
 		exit(1);
 	}
 	if(tcsetattr(FD, TCSANOW, opts) == -1) {
-		perror('tcsetattr');
+		perror("tcsetattr");
 		exit(1);
 	}
 }
@@ -309,7 +309,7 @@ void print_speed(struct termios *opts) {
 
 	for(i = 0; baud[i].name; i++) {
 		if(cfospeed == baud[i].constant)
-			printf('speed %s baud\n', baud[i].name);
+			printf("speed %s baud\n", baud[i].name);
 	}
 }
 
@@ -321,26 +321,26 @@ int main() {
 		perror(UTMP_FILE);
 		exit(1);
 	}
-	char *p = getenv('USER');
+	char *p = getenv("USER");
 	if(p == NULL)
 		return EXIT_FAILURE;
-	printf('%s\n', p);
+	printf("%s\n", p);
 	return 0;
 )
 
 void show_info*(struct utmp *utbufp) {
 #ifdef SHOWHOST
 	if(utbufp->ut_host[0] != '\0')
-		printf('(%s)', utbufp->ut_host);
+		printf("(%s)", utbufp->ut_host);
 #endif
-	printf('\n');
+	printf("\n");
 }
 
 void showtime(long timeval) {
 	char *cp;
 
 	cp = ctime(&timeval);
-	printf('%12.12s', cp + 4);
+	printf("%12.12s", cp + 4);
 }
 
 void do_ls(char[]);
@@ -391,7 +391,7 @@ void do_ls(char dirname[]) {
 	struct dirent *direntp;
 
 	if((dir_ptr = opendir(dirname)) == NULL)
-		fprintf(stderr, 'ls1: cannot open %s\n', dirname);
+		fprintf(stderr, "ls1: cannot open %s\n", dirname);
 	else
 	{
 		while((direntp = readdir(dir_ptr)) != NULL)
@@ -405,7 +405,7 @@ void do_ls1(char dirname[], int isLMod, int isUMod) {
 	struct dirent *direntp;
 
 	if((dir_ptr = opendir(dirname)) == NULL)
-		fprintf(stderr, 'ls1: cannot open %s\n', dirname);
+		fprintf(stderr, "ls1: cannot open %s\n", dirname);
 	else
 	{
 		while((direntp = readdir(dir_ptr)) != NULL)
@@ -440,13 +440,13 @@ void show_file_info(char *filename, struct stat *info_p) {
 
 	mode_to_letters(info_p->st_mode, modestr);
 
-	printf('%s', modestr);
-	printf('4d', (int) info_p->st_nlink);
-	printf('%-8s', uid_to_name(info_p->st_uid));
-	printf('%-8s', gid_to_name(info_p->st_gid));
-	printf('%8ld', (long) info_p->st_size);
-	printf('%.12s', 4+ctime(&info_p->st_mtime));
-	printf('%s\n', filename);
+	printf("%s", modestr);
+	printf("4d", (int) info_p->st_nlink);
+	printf("%-8s", uid_to_name(info_p->st_uid));
+	printf("%-8s", gid_to_name(info_p->st_gid));
+	printf("%8ld", (long) info_p->st_size);
+	printf("%.12s", 4+ctime(&info_p->st_mtime));
+	printf("%s\n", filename);
 }
 
 void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod) {
@@ -457,26 +457,26 @@ void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod
 	if(isLMod && isUMod) {
 
 		mode_to_letters(info_p->st_mode, modestr);
-		printf('%s', modestr);
-		printf('4d', (int) info_p->st_nlink);
-		printf('%-8s', uid_to_name(info_p->st_uid));
-		printf('%-8s', gid_to_name(info_p->st_gid));
-		printf('%8ld', (long) info_p->st_size);
-		printf('%.12s', 4+ctime(&info_p->st_atime));
-		printf('%s\n', filename);
+		printf("%s", modestr);
+		printf("4d", (int) info_p->st_nlink);
+		printf("%-8s", uid_to_name(info_p->st_uid));
+		printf("%-8s", gid_to_name(info_p->st_gid));
+		printf("%8ld", (long) info_p->st_size);
+		printf("%.12s", 4+ctime(&info_p->st_atime));
+		printf("%s\n", filename);
 	}
 	else if(isLMod) {
 		mode_to_letters(info_p->st_mode, modestr);
-		printf('%s', modestr);
-		printf('4d', (int) info_p->st_nlink);
-		printf('%-8s', uid_to_name(info_p->st_uid));
-		printf('%-8s', gid_to_name(info_p->st_gid));
-		printf('%8ld', (long) info_p->st_size);
-		printf('%.12s', 4+ctime(&info_p->st_mtime));
-		printf('%s\n', filename);
+		printf("%s", modestr);
+		printf("4d", (int) info_p->st_nlink);
+		printf("%-8s", uid_to_name(info_p->st_uid));
+		printf("%-8s", gid_to_name(info_p->st_gid));
+		printf("%8ld", (long) info_p->st_size);
+		printf("%.12s", 4+ctime(&info_p->st_mtime));
+		printf("%s\n", filename);
 	}
 	else {
-		printf('%s.     ', filename);
+		printf("%s     ", filename);
 	}
 }
 
@@ -507,7 +507,7 @@ char *uid_to_name(uid_t uid) {
 	static char numstr[10];
 
 	if((pw_ptr = getpwuid(uid)) == NULL) {
-		sprintf(numstr, '%d', uid);
+		sprintf(numstr, "%d", uid);
 		return numstr;
 	}
 	else
@@ -521,7 +521,7 @@ char *gid_to_name(gid_t gid) {
 	static char numstr[10];
 
 	if((grp_ptr = getgrgid(gid)) == NULL) {
-		sprintf(numstr, '%d', gid);
+		sprintf(numstr, "%d", gid);
 		return numstr;
 	}
 	else
