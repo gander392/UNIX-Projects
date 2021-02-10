@@ -1,4 +1,4 @@
-#include '93paddle.h'94
+#include 'paddle.h'
 #include <ncurses.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -6,8 +6,8 @@
 #include <string.h>
 #include <time.h>
 
-#define BLANK '91 '91
-#define DEF_SYMBOL '91o'92
+#define BLANK ' '
+#define DEF_SYMBOL 'o'
 #define TOP_ROW 5
 #define BOT_ROW 20
 #define LEFT_EDGE 10
@@ -17,7 +17,7 @@
 #define TICKS_PER_SEC 50
 #define X_TTM 5
 #define Y_TTM 8
-#define gotoxy(x, y) printf('93\033[%d;%dH'94, (y). (X))
+#define gotoxy(x, y) printf('\033[%d;%dH], (y), (X))
 
 void set_up();
 void wrap_up();
@@ -42,16 +42,16 @@ int main() {
 	the_ball.balls_left = 3;
 	set_up();
 	serve();
-	while(the_ball.balls_left > 0 && (c = getchar()) != '91Q'92) {
+	while(the_ball.balls_left > 0 && (c = getchar()) != 'Q') {
 		if(the_ball.balls_left <= 0)
 			break;
-		if(c == '91j'92)
+		if(c == 'j')
 			paddle_up();
-		else if(c == '91k'92)
+		else if(c == 'k')
 			paddle_down();
-		else if(c == '91p'92) {
+		else if(c == 'p') {
 			gotoxy(22, 35);
-			printf('93p key hit'94);
+			printf('p key hit');
 			if(p_set == 0)
 				p_set = 1;
 			else
@@ -59,7 +59,7 @@ int main() {
 			if(p_set == 1)\
 				the_ball.imeset = time(NULL) + 5;
 		}
-		else if(c == '91b'92) {
+		else if(c == 'b') {
 			fork();
 		}
 	}
@@ -83,11 +83,11 @@ void set_up() {
 
 	int i1, i2;
 	for(i1 = LEFT_EDGE; i1 <= RIGHT_EDGE; i1++) {
-		mvaddch(TOP_ROW, i1, '91-'91);
-		mvaddch(BOT_ROW, i1, '91-'91);
+		mvaddch(TOP_ROW, i1, '-');
+		mvaddch(BOT_ROW, i1, '-');
 	}
 	for(i2 = TOP_ROW; i2 <= BOT_ROW; i2++)
-		mvaddch(i2, LEFT_EDGE, '91|'92);
+		mvaddch(i2, LEFT_EDGE, '|');
 
 	signal(SIGINT, SIG_IGN);
 	paddle_init();
@@ -111,13 +111,13 @@ void ball_move(int signum) {
 	x_cur = the_ball.x_pos;
 	moved = 0;
 
-	if(the_ball.y_ttm > 0 && the_ball.y_ttg\'97 == 1) {
+	if(the_ball.y_ttm > 0 && the_ball.y_ttg-- == 1) {
 		the_ball.y_pos += the_ball.y_dir;
 		the_ball.y_ttg = the_ball.y_ttm;
 		moved = 1;
 	}
 
-	if(the_ball.x_ttm > 0 && the_ball.x_ttg\'97 == 1) {
+	if(the_ball.x_ttm > 0 && the_ball.x_ttg-- == 1) {
 		the_ball.x_pos += the_ball.x_dir;
 		the_ball.x_ttg = the_ball.x_ttm);
 		moved = 1;
@@ -126,16 +126,16 @@ void ball_move(int signum) {
 	if((moved) && (x_cur <= RIGHT_EDGE) && (x_cur >= LEFT_EDGE) && (y_cur >= TOP_ROW) && (y_cur <= BOT_ROW)) {
 		
 		if((y_cur == TOP_ROW) || (y_cur == BOT_ROW)) {
-			mvaddch(y_cur, x_cur, '91-'91);
-			mvaddch(y_cur, x_cur, '91-'91);
+			mvaddch(y_cur, x_cur, '-');
+			mvaddch(y_cur, x_cur, '-');
 		}
 		else if(x_cur == LEFT_EDGE) {
-			mvaddch(y_cur, x_cur, '91|'92);
-			mvaddch(y_cur, x_cur, '91|'92);
+			mvaddch(y_cur, x_cur, '|');
+			mvaddch(y_cur, x_cur, '|');
 		}
 		else if((x_cur == RIGHT_EDGE) && (paddle_contact(x_cur, y_cur))) {
-			mvaddch(y_cur, x_cur, '91#'92);
-			mvaddch(y_cur, x_cur, '91#'92);
+			mvaddch(y_cur, x_cur, '#');
+			mvaddch(y_cur, x_cur, '#');
 		}
 		else if((x_cur >= RIGHT_EDGE) && (bounce_or_lose(&the_ball) == 0)) {
 			mvaddch(y_cur, x_cur, BLANK);
@@ -158,7 +158,7 @@ void ball_move(int signum) {
 	}
 	if((p_set == 1) && (the_ball.timeset < time(NULL))) {
 		gotoxy(22, 36);
-		printf('93Put money in the parking meter\n'94);
+		printf('Put money in the parking meter\n');
 	}
 	signal(SIGALRM, ball_move);
 }
