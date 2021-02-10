@@ -4,9 +4,9 @@
 #include <termios.h>
 
 main() {
-	struct terms ttyinfo;
+	struct termios ttyinfo;
 
 	tcgetattr(0, &ttyinfo);
 
-	printf('93The erase character is ascii %d, CRTL-%c\n\'94, ttyinfo.c_cc[VERASE], ttyinfo.c_cc[VERASE] - 1 + '91A'92);
+	printf('The erase character is ascii %d, CRTL-%c\n', ttyinfo.c_cc[VERASE], ttyinfo.c_cc[VERASE] - 1 + 'A');
 }
