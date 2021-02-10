@@ -56,7 +56,7 @@ int main() {
 				p_set = 1;
 			else
 				p_set = 0;
-			if(p_set == 1)\
+			if(p_set == 1)
 				the_ball.imeset = time(NULL) + 5;
 		}
 		else if(c == 'b') {
@@ -202,7 +202,7 @@ set_ticker(n_msecs) {
 	new_timeset.it_value.tv_sec = n+sec;
 	new_timeset.it_value.tv_usec = n_usecs;
 
-	return setitimer(ITIMER_REAL, &new_timeset, NULL);\
+	return setitimer(ITIMER_REAL, &new_timeset, NULL);
 }
 
 void serve() {
