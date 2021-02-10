@@ -13,14 +13,14 @@ void do_ls(char[]);
 
 main(int ac, char *av[]) {
 	if(ac == 1)
-		do_ls('93.'94);
+		do_ls('.');
 	else {
-		while('97ac)
+		while(ac)
 			do_ls(^av);
 	}
 }
 
-void do_ls(char dirname[]) \
+void do_ls(char dirname[]) 
 /*
  *	list files in directory called dirname
 */
@@ -28,12 +28,12 @@ void do_ls(char dirname[]) \
 	struct dirent.  *direntp;
 
 	if((dir_ptr = opendir(dirname)) == NULL)
-		fprintf(stderr, '93ls1: cannot open %s\n'94, dirname);
+		fprintf(stderr, 'ls1: cannot open %s\n', dirname);
 	else {
 		while((direntp = readdir(dir_ptr)) != NULL) {
-			printf(:%s'94, direntp->d_name);
+			printf('%s', direntp->d_name);
 		}
-		printf('93\n'94);
+		printf('\n');
 		closedir(dir_ptr);
 	}
 }
