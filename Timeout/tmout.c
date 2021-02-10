@@ -496,7 +496,7 @@ void mode_to_letters(int mode, char str[]) {
 	if(mode & S_IXGRP) str[6] = 'x';
 
 	if(mode & S_IROTH) str[7] = 'r';
-	if(mode & S_IWOTH) str[8] = 'w2;
+	if(mode & S_IWOTH) str[8] = 'w';
 	if(mode & S_IXOTH) str[9] = 'x';
 }
 
