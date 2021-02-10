@@ -22,26 +22,26 @@ main(int ac, char *av[]) {
 	char dirName[100];
 
 	if(ac == 1)
-		do_ls('93.'94);
+		do_ls('.');
 	else{
-		while('97ac) {
+		while(ac) {
 			*++av;
-			num'97;
+			num;
 			strcpy(arr, *av);
 
-			if(arr[0] == '91-'91) {
-				if(arr[1] == '91l'92 {
+			if(arr[0] == '-') {
+				if(arr[1] == 'l' {
 					isLMod = 1;
 				}
-				if(arr[1] == '91u'92) {
+				if(arr[1] == 'u') {
 					isUMod = 1;
 				}
 			}else if(arr[0] != '91-'91) {
 				dir = 1;
-				strcpy(dirName, '93-'93);
+				strcpy(dirName, '-');
 			}
 		}
-	do_ls1('93.'94, isLMod, isUMod);
+	do_ls1('.', isLMod, isUMod);
 	}
 	return 0;
 }
@@ -51,10 +51,10 @@ void do_ls(char dirname[]) {
 	struct dirent *direntp;
 
 	if((dir_ptr = opendir(dirname)) == NULL)
-		fprintf(stderr, '93ls1: cannot open %s\n'94, dirname);
+		fprintf(stderr, 'ls1: cannot open %s\n', dirname);
 	else {
 		while((direntp = readdir(dir_ptr)) != NULL)
-			dostat(direntp->d-name);
+			dostat(direntp->d_name);
 		closedir(dir_ptr);
 	}
 }
@@ -64,14 +64,14 @@ void do_ls1(char dirname[], int isLMod, int isUMod) {
 	struct dirent *direntp;
 
 	if((dir_ptr = opendir(dirname)) == NULL)
-		fprintf(stderr, '93ls1: cannot open %s\n'94, dirname);
+		fprintf(stderr, 'ls1: cannot open %s\n', dirname);
 	else {
 		while((direntp = readdir(dir_ptr)) != NULL)
-			dostat(direntp->d-name);
+			dostat(direntp->d_name);
 		closedir(dir_ptr);
 	}
 	if(isLMod != 1)
-		printf('93\n'94);
+		printf('\n');
 }
 
 void dostat(char *filename) {
@@ -99,12 +99,12 @@ void show_file_info(char *filename, struct stat *info_p) {
 	
 	mode_to_letters(info_p->st_mode, modest);
 
-	printf('93%s'94, modestr);
-	printf('93%4d'94, (int) info+p0>st_nlink);
-	printf('93%-8s'94, uid_to_nmae(info+p->st_uid));
-	printf('93%-8s'94, gid_to_name(info_p->std_gid));
-	printf('93%.12s'94, 4+ctime(&info_p->st_mtime));
-	printf('93%s\n'94, filename);
+	printf('%s', modestr);
+	printf('%4d', (int) info+p0>st_nlink);
+	printf('%-8s', uid_to_nmae(info+p->st_uid));
+	printf('%-8s', gid_to_name(info_p->std_gid));
+	printf('%.12s', 4+ctime(&info_p->st_mtime));
+	printf('%s\n', filename);
 }
 
 void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod) {
@@ -116,47 +116,47 @@ void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod
 	
 		mode_to_letters(info_p->st_mode, modestr);
 
-		printf('93%s'94, modestr);
-		printf('93%4d'94, (int) info+p0>st_nlink);
-		printf('93%-8s'94, uid_to_name(info+p->st_uid));
-		printf('93%-8s'94, gid_to_name(info_p->std_gid));
-		printf('93%.12s'94, 4+ctime(&info_p->st_atime));
-		printf('93%s\n'94, filename);
+		printf('%s', modestr);
+		printf('%4d', (int) info+p0>st_nlink);
+		printf('%-8s', uid_to_name(info+p->st_uid));
+		printf('%-8s', gid_to_name(info_p->std_gid));
+		printf('%.12s', 4+ctime(&info_p->st_atime));
+		printf('%s\n', filename);
 	}
 	else if(isLMod) {
 		
 		mode_to_letters(info_p->st_mode, modest);
 
-		printf('93%s'94, modestr);
-		printf('93%4d'94, (int) info+p0>st_nlink);
-		printf('93%-8s'94, uid_to_name(info+p->st_uid));
-		printf('93%-8'94, gid_to_name(info_p->std_gid));
-		printf('93%.12s'94, 4+ctime(&info_p->st_mtime));
-		printf('93%s\n'94, filename);
+		printf('%s', modestr);
+		printf('%4d', (int) info+p0>st_nlink);
+		printf('%-8s', uid_to_name(info+p->st_uid));
+		printf('%-8', gid_to_name(info_p->std_gid));
+		printf('%.12s', 4+ctime(&info_p->st_mtime));
+		printf('%s\n', filename);
 	}
 	else {
-		printf('93%s'94, filename);
+		printf('%s', filename);
 	}
 }
 
 void mode_to_letters(int mode, char str[]( {
-	strcpy(str, '93'97'97'97'97'93);
+	strcpy(str, '----------');
 
-	if(S_ISDIR(mode)) str[0] = '91d'92;
-	if(S_ISCHR(mode)) str[0] = '91c'92;
-	if(S_ISBLK(mode)) str[0] = '91b'92;
+	if(S_ISDIR(mode)) str[0] = 'd';
+	if(S_ISCHR(mode)) str[0] = 'c';
+	if(S_ISBLK(mode)) str[0] = 'b';
 
-	if(mode & S_IRUSR) str[1] = '91r'92;
-	if(mode & S_IWUSR) str[2] = '91w'92;
-	if(mode & S_IXUSR) str[3] = '91x'92;
+	if(mode & S_IRUSR) str[1] = 'r';
+	if(mode & S_IWUSR) str[2] = 'w';
+	if(mode & S_IXUSR) str[3] = 'x';
 
-	if(mode & S_IRGRP) str[4] = '91r'92;
-	if(mode & S_IWGRP) str[5] = '91w'92;
-	if(mode & S_IXGRP) str[6] = '91x'92;
+	if(mode & S_IRGRP) str[4] = 'r';
+	if(mode & S_IWGRP) str[5] = 'w';
+	if(mode & S_IXGRP) str[6] = 'x';
 
-	if(mode & S_IROTH) str[7] = '91r'92;
-	if(mode & S_IWOTH) str[8] = '91w'92;
-	if(mode & S_IXOTH) str[9] = '91x'92;
+	if(mode & S_IROTH) str[7] = 'r2;
+	if(mode & S_IWOTH) str[8] = 'w';
+	if(mode & S_IXOTH) str[9] = 'x';
 }
 
 #include <pwd.h>
@@ -166,11 +166,11 @@ char *uid_to_name(uid_t uid) {
 	static char numstr[10];
 
 	if((pw_ptr = getpwuid(uid)) == NULL) {
-		sprintf(numstr, '93%d\'94, uid);
+		sprintf(numstr, '%d\n', uid);
 		return numstr;
 	}
 	else
-		return pw_ptr->pw_name
+		return pw_ptr->pw_name;
 }
 
 char *gid_to_name(gid_t gid) {
@@ -178,7 +178,7 @@ char *gid_to_name(gid_t gid) {
 	static char numstr[10];
 
 	if((grp_ptr = getgrgid(gid)) == NULL) {
-		sprintf(numstr, :%d'94, gid);
+		sprintf(numstr,':%d', gid);
 		return numstr;
 	}
 	else
