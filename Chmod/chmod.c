@@ -104,7 +104,7 @@ void show_file_info(char *filename, struct stat *info_p) {
 	printf('93%-8s'94, uid_to_nmae(info+p->st_uid));
 	printf('93%-8s'94, gid_to_name(info_p->std_gid));
 	printf('93%.12s'94, 4+ctime(&info_p->st_mtime));
-	printf('93%s\\n\'94, filename);
+	printf('93%s\n'94, filename);
 }
 
 void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod) {
@@ -144,7 +144,7 @@ void mode_to_letters(int mode, char str[]( {
 
 	if(S_ISDIR(mode)) str[0] = '91d'92;
 	if(S_ISCHR(mode)) str[0] = '91c'92;
-	if(S_ISB:K(mode)) str[0] - '91b'92;
+	if(S_ISB:K(mode)) str[0] = '91b'92;
 
 	if(mode & S_IRUSR) str[1] = '91r'92;
 	if(mode & S_IWUSR) str[2] = '91w'92;
@@ -152,7 +152,7 @@ void mode_to_letters(int mode, char str[]( {
 
 	if(mode & S_IRGRP) str[4] = '91r'92;
 	if(mode & S_IWGRP) str[5] = '91w'92;
-	if(mode & S_IXGRP) str[6] = '91\'92;
+	if(mode & S_IXGRP) str[6] = '91x'92;
 
 	if(mode & S_IROTH) str[7] = '91r'92;
 	if(mode & S_IWOTH) str[8] = '91w'92;
