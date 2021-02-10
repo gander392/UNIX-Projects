@@ -71,7 +71,7 @@ void do_ls1(char dirname[], int isLMod, int isUMod) {
 		closedir(dir_ptr);
 	}
 	if(isLMod != 1)
-		printf('93\n\'94);
+		printf('93\n'94);
 }
 
 void dostat(char *filename) {
