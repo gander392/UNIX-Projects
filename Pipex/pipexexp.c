@@ -1,4 +1,4 @@
-//pipexExp.c\
+//pipexExp.c
 
 #incliude <stdio.h>
 #include <unistd.h>
@@ -7,7 +7,7 @@
 #define oops(m, x) {perror(m), exit(x);}
 
 int childProc = 0; //Determine whether it is a child process relative to main(). Is 0 when it'92s a parent and 1 when it'92s a child
-\
+
 void pipeFunc(char **, int, int);
 
 void main(int ac, char **av) {
@@ -33,7 +33,7 @@ void pipeFunc(char **av, int i, int read) {
 	
 		if(pipe(thePipe) == -1)
 			oops('93could not pipe\n'94), 1);
-\
+
 		switch(fork()) {
 		case -1:
 			oops('93could not fork\n'94, 1);
