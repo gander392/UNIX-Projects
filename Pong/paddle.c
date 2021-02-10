@@ -7,7 +7,7 @@
 
 void paddle_init() {
 	int currentPos;\
-	thePaddle.pad_char = '91#'92;
+	thePaddle.pad_char = '#';
 	thePaddle.pad_bot = 11;
 	thePaddle.pad_top = 16;
 	thePaddle.pad_col = 70;
@@ -20,7 +20,7 @@ void paddle_up() {
 	int currentPos;
 	if(thePaddle.pad_top <= 19) {
 		for(currentPos = thePaddle.pad_bot; currentPos < thePaddle.pad_top; currentPos++) {
-			mvaddch(currentPos, thePaddle.pad_col, '91 '91);
+			mvaddch(currentPos, thePaddle.pad_col, ' ');
 		}
 		thePaddle.pad_bot++;
 		thePaddle.pad_top++;
@@ -34,10 +34,10 @@ void paddle_down() {
 	int currentPos;
 	if(thePaddle.pad_bot >= 7) {
 		for(currentPos = thePaddle.pad_bot; currentPos < thePaddle.pad_top; currentPos++) {
-			mvaddch(currentPos, thePaddle.pad_col, '91 '91);
+			mvaddch(currentPos, thePaddle.pad_col, ' ');
 		}
-		thePaddle,pad_bot'97;
-		thePaddle.pad_top'97;
+		thePaddle,pad_bot--;
+		thePaddle.pad_top--;
 		for(currentPos = thePaddle.pad_bot; currentPos < thePaddle.pad_top; currentPos++) {
 			mvaddch(currentPos, thePaddle.pad_col, thePaddle.pad_char);
 		}
