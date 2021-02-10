@@ -144,7 +144,7 @@ void mode_to_letters(int mode, char str[]( {
 
 	if(S_ISDIR(mode)) str[0] = '91d'92;
 	if(S_ISCHR(mode)) str[0] = '91c'92;
-	if(S_ISB:K(mode)) str[0] = '91b'92;
+	if(S_ISBLK(mode)) str[0] = '91b'92;
 
 	if(mode & S_IRUSR) str[1] = '91r'92;
 	if(mode & S_IWUSR) str[2] = '91w'92;
