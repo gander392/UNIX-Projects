@@ -17,7 +17,7 @@
 #define TICKS_PER_SEC 50
 #define X_TTM 5
 #define Y_TTM 8
-#define gotoxy(x, y) printf('\033[%d;%dH], (y), (X))
+#define gotoxy(x, y) printf("\033[%d;%dH", (y), (X))
 
 void set_up();
 void wrap_up();
