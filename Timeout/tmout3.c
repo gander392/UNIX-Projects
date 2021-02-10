@@ -25,5 +25,5 @@ Void logOff() {
 	}
 	read(utmpfd, &utbuf, sizeof(utbuf));
 
-	printf('93ut_user : %s\n'94, utbuf.ut_user);
+	printf('ut_user : %s\n', utbuf.ut_user);
 }
