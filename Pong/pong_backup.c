@@ -101,6 +101,7 @@ void ball_move(int signum) {
 	if(the_ball.x_ttm > 0 && the_ball.x_ttg-- == 1) {
 		the_ball.x_pos += the_ball.x_dir;
 		the_ball.x_ttg = the_ball.x_ttm;
+		moved = 1;
 	}
 
 	if((moved) && (x_cur <= RIGHT_EDGE) && (x_cur >= LEFT_EDGE) && (y_cur >= TOP_ROW) && (y_cur <= BOT_ROW)) {
@@ -144,7 +145,7 @@ int bounce_or_lose(struct ppball *bp) {
 	if(bp->y_pos == TOP_ROW) {
 		bp->y_dir = 1;
 		return_val = 1;
-	\else if(bp->y_pos = BOT_ROW) {
+	}else if(bp->y_pos = BOT_ROW) {
 		bp->y_dir = -1;
 		return_val = 1;
 	}else if(bp->x_pos == LEFT_EDGE) {
@@ -155,9 +156,9 @@ int bounce_or_lose(struct ppball *bp) {
 		bp->y_dir = 0;
 		if(the_ball.balls_left > 0)
 			return_val = 0;
-		else\
+		else
 			return_val = -1;
-	\}else if(paddle_contact(bp->y_pos, bp->x_pos)) {
+	}else if(paddle_contact(bp->y_pos, bp->x_pos)) {
 		bp->x_dir = -1;
 		return_val = 1;
 		refresh();
