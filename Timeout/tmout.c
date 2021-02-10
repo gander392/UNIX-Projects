@@ -362,7 +362,7 @@ main(int ac, char *av[]) {
 	char dirName = 100;
 
 	if(ac == 1)
-		do_ls('.');
+		do_ls(".");
 	else
 		while(--ac) {
 			*++av;
@@ -378,10 +378,10 @@ main(int ac, char *av[]) {
 				}
 			}else if(arr[0] != '-') {
 			dir = 1;
-			strcpy(dirName, '-');
+			strcpy(dirName, "-");
 			}
 		}
-	do_ls('.', isLMod, isUMod);
+	do_ls(".", isLMod, isUMod);
 	}
 	return 0;
 }
@@ -481,7 +481,7 @@ void show_file_info1(char *filename, struct stat *info_p, int isLMod, int isUMod
 }
 
 void mode_to_letters(int mode, char str[]) {
-	strcpy(str, '----------');
+	strcpy(str, "----------");
 
 	if(S_ISDIR(mode)) str[0] = 'd';
 	if(S_ISCHR(mode)) str[0] = 'c';
